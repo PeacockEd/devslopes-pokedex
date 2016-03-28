@@ -19,7 +19,7 @@ class PokeCell: UICollectionViewCell {
         super.init(coder: aDecoder)
         
         self.layer.cornerRadius = 8
-        self.clipsToBounds = true
+        //self.clipsToBounds = true
     }
     
     func configureCell(pokemon: Pokemon)
