@@ -1,8 +1,6 @@
-# Uncomment this line to define a global platform for your project
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target 'devslopes-pokedex' do
-pod 'Alamofire', '~> 3.0'
+pod 'Alamofire', '3.2.1'
 end
-

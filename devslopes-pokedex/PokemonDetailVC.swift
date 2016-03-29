@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class PokemonDetailVC: UIViewController {
     
@@ -30,7 +31,38 @@ class PokemonDetailVC: UIViewController {
     {
         super.viewDidLoad()
         
+        updateDetailsUI()
+        
         nameLbl.text = pokeItem.name.capitalizedString
+        let img = UIImage(named: "\(pokeItem.pokedexId)")
+        mainImg.image = img
+        currentEvoImg.image = img
+        
+        pokeItem.downloadPokemonDetails { self.updateDetailsUI() }
+    }
+    
+    private func updateDetailsUI()
+    {
+        descriptionLbl.text = pokeItem.descriptionText
+        typeLbl.text = pokeItem.type
+        defenseLbl.text = pokeItem.defense
+        heightLbl.text = pokeItem.height
+        weightLbl.text = pokeItem.weight
+        idLbl.text = "\(pokeItem.pokedexId)"
+        attackLbl.text = pokeItem.attack
+        if pokeItem.nextEvolutionId == "" {
+            evoLbl.text = "No Evolutions"
+            nextEvoImg.hidden = true
+        } else {
+            nextEvoImg.hidden = false
+            nextEvoImg.image = UIImage(named: "\(pokeItem.nextEvolutionId)")
+            var str = "Next Evolution: \(pokeItem.nextEvolutionText)"
+            if pokeItem.nextEvolutionLevel != "" {
+                str += " - LVL \(pokeItem.nextEvolutionLevel)"
+            }
+            evoLbl.text = str
+        }
+        
     }
 
     override func didReceiveMemoryWarning()
